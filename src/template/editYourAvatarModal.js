@@ -15,15 +15,6 @@ isShowCropAndButton = false;
 var widthAvatar = 128,
 heightAvatar = 128;
 
-Template.editYourAvatarModalBody.helpers({
-    image: function(){
-        if(Meteor.user())
-            return Meteor.user().profile.image
-        else
-            return AVATAR; 
-    }
-});
-
 Template.editYourAvatarModal.rendered = function(){
     var tmpl = this;
     // cache the dom
@@ -39,17 +30,33 @@ Template.editYourAvatarModal.rendered = function(){
         loadImage(tmpl, Meteor.user().profile.image);
         $(function () {
             displayImage.imgAreaSelect({ aspectRatio: '1:1', handles: true,
-            fadeSpeed: 200, onSelectChange: preview, parent: $('.modal-content') });
+            fadeSpeed: 200, onSelectChange: preview });
         });
     });
 };
+
 Template.editYourAvatarModalBody.rendered = function(){
     displayImage = $(this.find('#avatarUserImg'));
-    $(function () {
-        displayImage.imgAreaSelect({ aspectRatio: '1:1', handles: true,
-        fadeSpeed: 200, onSelectChange: preview });
-    }); 
 };
+
+Template.editYourAvatarModal.helpers({
+    dlgTitle: function() {
+        settngDep.depend();
+        return settings.DLG_TITLE;
+    },
+    saveBtn: function() {
+        settngDep.depend();
+        return settings.SAVE_BTN;
+    }
+});
+
+Template.editYourAvatarModalBody.helpers({
+    changeAvatar: function() {
+        settngDep.depend();
+        return settings.CHANGE_AVATAR;
+    }
+});
+
 /**
  * EVENTS
  */
@@ -80,6 +87,7 @@ Template.editYourAvatarModalBody.events({
         tmp.find('input[name=avatarFile]').click();
     }
 });
+
 Template.editYourAvatarModal.events({
     'click #saveAvatarButton': function(evt, tmp){
         evt.preventDefault();
@@ -92,6 +100,7 @@ Template.editYourAvatarModal.events({
         }
     }
 });
+
 /**
  * FUNCTION CLASS DEFINE
  */
@@ -139,6 +148,7 @@ function propSaveAvatarButton(bool){
         saveAvatarButton.prop('disabled', !bool);
 };
 function loadImage(tmp, src){
+    $(tmp.find('#avatarUserImg')).toggleClass('hide', !src);
     $(tmp.find('#avatarUserImg')).attr('src', src);
     $(tmp.find('#preview img')).attr('src', src);
     $(tmp.find('#realImage')).attr('src', src);

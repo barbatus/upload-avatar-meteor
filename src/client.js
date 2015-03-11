@@ -3,13 +3,13 @@ FileReaderObject = {
         var reader = new FileReader();
         reader.onload = function (e) {
             // check file
-            if(!_.contains(FILEUPLOAD.IMG.TYPE, file.type)){
-                callback(new Meteor.Error(412, "File format not supported. Please upload .jpg or .png"));
+            if(!_.contains(settings.FILE_TYPE, file.type)){
+                callback(new Meteor.Error(412, settings.ERR_IMG_TYPE));
                 return;
             }
             // check size
-            if(file.size > FILEUPLOAD.IMG.MAXSIZE){
-                callback(new Meteor.Error(412, "File is too large. 512kb size limit"));
+            if(file.size > settings.FILE_MAXSIZE){
+                callback(new Meteor.Error(412, settings.ERR_FILE_SIZE));
                 return;
             }
             file.result = e.target.result;

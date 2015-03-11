@@ -4,7 +4,7 @@
             <div class="modal-content modal-radius">
                 <div class="modal-header">
                     <button aria-hidden="true" class="close" data-dismiss="modal" type="button">×</button>
-                    <h4 id="editYourAvatarModalLabel" class="modal-title md-title">Edit Your Avatar</h4>
+                    <h4 id="editYourAvatarModalLabel" class="modal-title md-title">{{dlgTitle}}</h4>
                 </div>
 
                 <div class="modal-body">
@@ -15,7 +15,7 @@
                     <div class="row">
                         <div class="col-md-9 error"></div>
                         <div class="col-md-3">
-                            <input type="button" id="saveAvatarButton" class="btn btn-modal pull-right col-lg-12" value="SAVE"/>
+                            <input type="button" id="saveAvatarButton" class="btn btn-primary pull-right col-lg-12" value="{{saveBtn}}"/>
                             <div class="clearfix"></div>
                         </div>
                     </div>
@@ -28,17 +28,17 @@
 <template name="editYourAvatarModalBody">
     <div class="row">
         <div class="col-md-9">
-            <img id="realImage" src="{{ image }}" class="hide" alt="" />
-            <img id="avatarUserImg" src="{{ image }}" class="" alt="" />
+            <img id="realImage" class="hide" alt="" />
+            <img id="avatarUserImg" alt="" />
 
             <input type="file" name="avatarFile" class="hide" />
-            <input type="button" id="changeAvatarButton" value="Change My Avatar" />
+            <input type="button" id="changeAvatarButton" value="{{changeAvatar}}" />
         </div>
 
         <div class="col-md-3">
             <div id="previewFrame" class="hide">
                 <div id="preview">
-                    <img src="{{ image }}"/>
+                    <img />
                 </div>
              </div>
         </div>

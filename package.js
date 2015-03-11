@@ -1,7 +1,7 @@
 Package.describe({
     summary: "simple upload avatar package for meteor",
     version: "1.1.0",
-    name: "particle4dev:upload-avatar",
+    name: "barbatus:upload-avatar",
     git: "https://github.com/particle4dev/upload-avatar-meteor.git"    
 });
 
@@ -13,12 +13,13 @@ var server = ['server'];
 Package.on_use(function (api) {
     api.versionsFrom("METEOR@0.9.3");
 
-    api.use(['underscore', 'accounts-base', 'accounts-password'], both);
-    api.use(['jquery', 'templating', 'mizzao:bootstrap-3@3.2.0_1'], client);
+    api.use(['deps', 'underscore', 'accounts-base', 'accounts-password'], both);
+    api.use(['jquery', 'templating', 'twbs:bootstrap@3.3.2'], client);
 
     //add file
     api.add_files([
-        'src/helpers.js'
+        'src/helpers.js',
+        'src/settings.js'
     ], both);
 
     api.add_files([
@@ -38,6 +39,7 @@ Package.on_use(function (api) {
 
     if (typeof api.export !== 'undefined') {
         //api.export('DEBUGX', both);
+        api.export('AvatarUpload');
     }
 });
 
