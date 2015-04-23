@@ -5,7 +5,6 @@ Package.describe({
     git: "https://github.com/particle4dev/upload-avatar-meteor.git"    
 });
 
-// meteor test-packages ./
 var both = ['client', 'server'];
 var client = ['client'];
 var server = ['server'];
